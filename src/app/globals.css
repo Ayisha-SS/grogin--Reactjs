@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wrapper{
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.slider {
+  position: relative;
+  height: 4px;
+  background-color: #000000;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.slider .thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: #000000;
+  cursor: grab;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  position: absolute; 
+  top: 50%; 
+  transform: translateY(-50%); 
+}
+.slider .thumb.active {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
