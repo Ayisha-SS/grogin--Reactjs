@@ -6,7 +6,7 @@ function Login() {
   return (
     <div>
         <LoginFunction/>
-        <Footer/>
+        {/* <Footer/> */}
     </div>
   )
 }

@@ -7,14 +7,7 @@ import Button from '@/app/_component/general/button';
 import RelatedProducts from './recomended';
 import { useFilter } from '../../../../context/page';
 
-// import products from '../../public/data/data.json';
-// import Navbar from '../../components/Navbar';
-// import Footer from '../../components/Footer';
-// import ReactImageMagnify from 'react-image-magnify';
-// import ReactImageMagnify from 'react-image-magnify';
 
-// import Button from '../../components/Button';
-// import RelatedProducts from '../../components/RelatedProducts';
 
 
 interface Details{
@@ -38,9 +31,7 @@ export const ProductDetails:React.FC<ProductDetailsProps> = ({productId}) =>{
     const [details, setDetails ] = useState<Details | null>(null);
     const { addToWishlist, removeFromWishlist, wishlist } = useFilter();
     const [selectedImage, setSelectedImage] = useState(details?.image);
-    // const searchParams = useSearchParams();
-    // const id = searchParams.get('id') || null;
-
+   
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,7 +44,6 @@ export const ProductDetails:React.FC<ProductDetailsProps> = ({productId}) =>{
                 setDetails(data);
             } catch (error) {
                 console.error('Error fetching product details:', error);
-                // Handle the error appropriately (e.g., display an error message to the user)
             }
         };
 
@@ -72,49 +62,7 @@ export const ProductDetails:React.FC<ProductDetailsProps> = ({productId}) =>{
         setSelectedImage(newImage);
       };
 
-    
 
-    // if (!product) {
-    //     return <p>Product not found</p>;
-    // }
-
-   
-
-    // const [time, setTime] = useState({ days: 81, hours: 6, minutes: 50, seconds: 2 });
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         if (time.seconds > 0) {
-    //             setTime(prev => ({ ...prev, seconds: prev.seconds - 1 }));
-    //         } else if (time.minutes > 0) {
-    //             setTime(prev => ({ ...prev, minutes: prev.minutes - 1, seconds: 59 }));
-    //         } else if (time.hours > 0) {
-    //             setTime(prev => ({ ...prev, hours: prev.hours -1 , minutes :59 , seconds :59 }));
-    //         } else if (time.days >0){
-    //             setTime(prev => ({ ...prev, days : prev.days -1, hours :23 ,minutes :59 ,seconds :59 }));
-    //         }
-    //     }, 1000);
-    //     return () => clearInterval(interval);
-    // }, [time]);
-
-    // const [count, setCount] = useState(0);
-    // const increment = () => {
-    //     setCount(count + 1);
-    // };
-    // const decrement = () => {
-    //     if (count > 0) {
-    //         setCount(count - 1);
-    //     }
-    // };
-
-    // const [wishlist, setWishlist] = useState<number[]>([]);
-
-    // const addToWishlist = (productId: number) => {
-    //     setWishlist([...wishlist, productId]);
-    // };
-
-    // const removeFromWishlist = (productId: number) => {
-    //     setWishlist(wishlist.filter(id => id !== productId));
-    // };
 
     return (
         <div>
@@ -123,7 +71,7 @@ export const ProductDetails:React.FC<ProductDetailsProps> = ({productId}) =>{
                 <div>
                 <div className="top flex justify-between w-full flex-col md:flex-row cursor-pointer">
                     <div className="left w-full md:w-5/12">
-                        <div>
+                        <div className='w-[70%]'>
                             {/* <ReactImageMagnify {...{
                                 smallImage: {
                                     alt: details.title,
@@ -144,7 +92,8 @@ export const ProductDetails:React.FC<ProductDetailsProps> = ({productId}) =>{
                                 magnifierSize: '30%',
                             }} 
                             /> */}
-                            <img src={details.image} alt="image" className='w-full' />
+                            
+                            <img src={details.image} alt="image" />
                         </div>
                         <div className='flex w-2/12 space-x-4'>
                             <img src={details.image} alt="Image" className='border border-red-500 w-full' onClick={() => handleImageClick(details.image)}/>
@@ -171,7 +120,6 @@ export const ProductDetails:React.FC<ProductDetailsProps> = ({productId}) =>{
                             <del className='text-xl font-medium'>$1.79</del>
                         </div>
                         <div>
-                            {/* <Button text='Order on WhatsApp' /> */}
                             <Button className='bg-green-600' label='Order on WhatsApp'/>
                         </div>
                         <div className='hidden sm:block'>

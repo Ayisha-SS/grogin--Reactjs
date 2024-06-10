@@ -6,7 +6,7 @@ export default function SignUp(){
     return(
         <div>
             <SignUpFunction/>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     )
 }
