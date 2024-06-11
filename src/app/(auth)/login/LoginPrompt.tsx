@@ -1,9 +1,9 @@
 "use client"
-import React from 'react';
-import Button from '@/app/_component/general/button';
+import React,{useState,useEffect} from 'react';
 import { useRouter } from 'next/navigation';
-import { IoWarning } from 'react-icons/io5';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+import Button from '@/app/_component/general/button';
 
 
 interface LoginPromptProps {
@@ -12,30 +12,47 @@ interface LoginPromptProps {
 
 
 const LoginPrompt:React.FC<LoginPromptProps> = ({closeLoginPrompt}) => {
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
     const router = useRouter();
 
-    // const handleSignIn = () => {
-    //     closeLoginPrompt();
-    //    router.push('/auth/login/login');
-    // };
+    useEffect(() => {
+      const token = Cookies.get('token');
+      const storedUser = Cookies.get('user');
+      if (storedUser) {
+          const userData = JSON.parse(storedUser);
+          setUsername(userData.username);
+      }
+      setIsLoggedIn(!!token);
+  }, []);
+
+ 
+
+  const handleLogout = () => {
+    Cookies.remove('token');
+    setIsLoggedIn(false);
+    closeLoginPrompt();
+    router.push('/');
+};
 
   return (
-    <div className='absolute p-2.5 right-[160px] top-[70px]  translate-x-(32%) bg-white z-10 shadow-lg shadow-[#ccc]'>
-      <div className='flex justify-between w-[150px]'>
-        <h5 className='text-base font-bold'>Hi boAthead!</h5>
+    <div className='absolute p-2.5 right-[160px] top-[70px]  translate-x-(32%) bg-[#d0c2ec] z-10 shadow-lg shadow-[#ccc] ' >
+      <div className='flex ml-4 justify-between w-[13rem] pb-2'>
+        <h5 className='text-base font-bold mt-6'>Hi, {isLoggedIn ? username : 'boAthead'} !</h5>
         <span className='font-bold text-lg cursor-pointer' onClick={closeLoginPrompt} >&times;</span>
       </div>
       <div className='mt-2 items-center ' >
-        {/* {userData ? (
-          <button className='w-[100%] text-lg rounded-lg items-center bg-black text-white' onClick={handleLogout}>Log Out</button>
-        ) : (
-          <button className='w-[100%] text-lg items-center rounded-lg bg-black text-white' onClick={() => setLogin(true)}>Log In</button>
-          )} */}
-        {/* <button className='w-[100%] text-lg items-center rounded-lg bg-black text-white' onClick={() => setLogin(true)}>Log In</button> */}
-        <Link href='/login'>
-                     <Button label='Sign In' className='w-[100%] text-lg items-center rounded-lg bg-black text-white' />
-                 </Link>
+      {isLoggedIn ? (
+                    <Button
+                        label='Log Out'
+                        className=' text-lg items-center rounded-lg bg-[#634C9F] text-white float-right'
+                        onClick={handleLogout}
+                    />
+                ) : (
+                    <Link href='/login'>
+                        <Button label='Sign In' className='w-[100%] text-lg items-center rounded-lg bg-[#634C9F] text-white' />
+                    </Link>
+                )}
       </div>
     </div>
   );

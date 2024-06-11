@@ -1,12 +1,11 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { FaUser, FaRegHeart } from "react-icons/fa";
 import { CiSearch } from 'react-icons/ci';
 import { IoLocationOutline } from "react-icons/io5";
 import { MdShoppingCart } from "react-icons/md";
 import Link from 'next/link';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 import { useFilter } from '../../../../../context/page';
 import LoginPrompt from '../../../(auth)/login/LoginPrompt';
 
@@ -14,26 +13,17 @@ const NavBar:React.FC = () => {
 
     const {searchTerm, setSearchTerm, wishlist} = useFilter();
     const [showPrompt, setShowPrompt] = useState(false);
+    const [username, setUsername] = useState<string | null>(null);
 
     const toggleLoginPrompt = () => setShowPrompt(!showPrompt);
-    // const { searchTerm, handleSearchChange, wishlist } = useContext(FilterContext);
-    // const [showLoginPrompt, setShowLoginPrompt] = useState(false);
-
-    // const toggleLoginPrompt = () => setShowLoginPrompt(!showLoginPrompt);
-
-    // const { userData, updateUserData } = useContext(Store);
-    // const handleLogout = () => {
-    //     updateUserData({ type: "LOGOUT" });
-    //     toast.success("Logged out successfully!", {
-    //         position: "top-center",
-    //         autoClose: 2000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined
-    //     });
-    // };
+    
+    useEffect(() => {
+        const storedUser = Cookies.get('user');
+        if (storedUser) {
+            const userData = JSON.parse(storedUser);
+            setUsername(userData.username);
+        }
+    }, []);
 
     return (
         <div className='border border-b-gray-400 sticky top-0 z-10 bg-white flex justify-center items-center '>
@@ -48,8 +38,8 @@ const NavBar:React.FC = () => {
                     </h1>
                     <div className='hidden md:block'>
                         <div className='flex justify-between text-center pt-1'>
-                            <IoLocationOutline className='bg-gray-300 p-1 text-3xl rounded-xl mr-1' />
-                            <span>Deliver to all</span>
+                            <IoLocationOutline className=' p-1 text-3xl rounded-xl mr-1' />
+                            <span className='flex flex-col text-left ml-3'>Deliver to <strong>all</strong></span>
                         </div>
                     </div>
                 </div>
@@ -66,13 +56,7 @@ const NavBar:React.FC = () => {
                 <div className='flex items-center whitespace-nowrap cursor-pointer space-x-6'>
                     <div className="flex flex-col items-center" onClick={toggleLoginPrompt}>
                         <FaUser  className="text-lg md:text-xl" />
-                        <h4 className='text-sm'>Sign In</h4>
-                        {/* {userData ? (
-                            <h4 className="text-sm" onClick={() => handleLogout()}>Logout</h4>
-                        ) : (
-                            <h4 className="text-sm" onClick={toggleLoginPrompt}>Sign In</h4>
-                        )} */}
-
+                        <h4 className='text-sm'>{username ? username : 'Sign In'}</h4>
                     </div>
                     <div className="flex flex-col items-center">
                         <FaRegHeart className="text-lg md:text-xl" />

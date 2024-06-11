@@ -1,9 +1,9 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AiFillStar } from 'react-icons/ai';
 import { CiShoppingCart } from 'react-icons/ci';
 import { FaHeart } from 'react-icons/fa';
-// import products from '../data/data.json';
 import { useFilter } from '../../../../context/page';
 
 interface RelatedProduct{
@@ -36,14 +36,6 @@ export const RelatedProducts:React.FC = () =>{
     })
     .catch(error => console.error('Error fetching data:',error));
   },[])
-//   const [relatedProducts, setRelatedProducts] = useState([]);
-
-//   useEffect(() => {
-//     const filterProducts = products.filter(item => item.category === category);
-//     const subsetRelatedProducts = filterProducts.slice(0, 6);
-//     setRelatedProducts(subsetRelatedProducts);
-//   }, [category]);
-
 
 const handleHeartClick = (productId: number) => {
   if (wishlist.includes(productId)) {
@@ -57,9 +49,6 @@ const handleHeartClick = (productId: number) => {
     <div className='space-y-5'>
       <h4 className='font-semibold'>Related Products</h4>
       <div className='grid grid-cols-2 lg:grid-cols-6 cursor-pointer'>
-      {/* <div className='grid max-[480px]:grid-cols-1 grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 mt-10 cursor-pointer max-[480px]:space-y-4'> */}
-        {/* {relatedProducts.map((item) => ( */}
-          {/* <Link key={item.id} href={`/products/${item.id}`} passHref> */}
           {relatedProducts.map(item => (
           <Link  href="products/productDetails" passHref>
             <div className='border p-2 space-y-2 flex flex-col gap-2 h-full'>
@@ -98,7 +87,6 @@ const handleHeartClick = (productId: number) => {
             </div>
           </Link>
           ))}
-        {/* ))} */}
       </div>
     </div>
   );

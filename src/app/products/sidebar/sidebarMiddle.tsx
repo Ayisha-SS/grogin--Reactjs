@@ -1,4 +1,4 @@
-// components/SidebarMiddle.js
+
 "use client"
 import React from 'react';
 import { useFilter } from '../../../../context/page';

@@ -1,4 +1,3 @@
-// components/NavbarTop.js
 
 import React from 'react';
 

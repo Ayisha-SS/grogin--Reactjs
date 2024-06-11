@@ -1,48 +1,29 @@
 "use client"
-import React, { useState, useContext } from 'react';
-// import { FilterContext } from '../context/FilterContext';
+import React from 'react';
 import { IoClose } from "react-icons/io5";
-// import FilterPanel from '../components/FilterPanel';
+import { useFilter } from '../../../../context/page';
+
 
 export default function ProductTop(){
-    // const { selectedCategories, handleCategoryChange } = useContext(FilterContext);
-    // const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
+ 
+    const { selectedCategories, setSelectedCategories } = useFilter();
 
-    // const handleCategoryClose = (category) => {
-    //     handleCategoryChange(category); 
-    // };
-
-    // const toggleFilterPanel = () => {
-    //     setIsFilterPanelOpen(!isFilterPanelOpen);
-    // };
+    const handleCategoryClose = (category:string) => {
+        setSelectedCategories(selectedCategories.filter(item => item !== category));
+    };
 
     return (
         <>
-            <div>
-                {/* <button onClick={toggleFilterPanel} className='md:hidden border border-black mb-5'>Filters</button> */}
-                <button className='md:hidden border border-black mb-5'>Filters</button>
-            </div>
-            {/* <FilterPanel isOpen={isFilterPanelOpen} toggleFilterPanel={toggleFilterPanel} /> */}
             <div className="flex flex-wrap space-y-2 space-x-2 mb-5">
-                
-                    <div className="px-2 py-1 flex items-center rounded-lg">
-                        <button className="ml-1" >
-                            <IoClose className="h-4 w-4 text-gray-600 hover:text-red-600" />
-                        </button>
-                        <span>Category</span>
-                    </div>
-                
-            </div>
-            {/* <div className="flex flex-wrap space-y-2 space-x-2 mb-5">
                 {selectedCategories.map(category => (
                     <div key={category} className="px-2 py-1 flex items-center rounded-lg">
+                        <span>{category}</span>
                         <button className="ml-1" onClick={() => handleCategoryClose(category)}>
                             <IoClose className="h-4 w-4 text-gray-600 hover:text-red-600" />
                         </button>
-                        <span>{category}</span>
                     </div>
                 ))}
-            </div> */}
+            </div>
             <div style={{ backgroundImage: 'url(/images/Banner.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                 <div className="p-8 space-y-2">
                     <button className='border bg-orange-200 font-semibold text-xs p-1 rounded-md text-amber-950 mb-3'>Only this week</button>

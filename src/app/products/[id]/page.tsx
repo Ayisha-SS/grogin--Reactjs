@@ -10,16 +10,15 @@ import { FilterProvider } from '../../../../context/page';
 
 
 export default function SingleItem({ params }: { params: { id: number } }){
-    // const router = useRouter()
-    // const { id } = router.query || {};
+    
     const searchParams = useSearchParams();
     const id = searchParams.get('id') || null;
 
     return(
         <>
-            <Head>
+            <head>
                 <title>Details | Grogin</title>
-            </Head>
+            </head>
             <FilterProvider>
                 <NavBarItem/>
                 <ProductDetails productId={params.id}/>

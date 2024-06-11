@@ -1,12 +1,13 @@
 import React from 'react'
 import LoginFunction from './login'
-import Footer from '@/app/products/footer/page'
 
 function Login() {
   return (
     <div>
+      <head>
+        <title>Grogin | Login</title>
+      </head>
         <LoginFunction/>
-        {/* <Footer/> */}
     </div>
   )
 }

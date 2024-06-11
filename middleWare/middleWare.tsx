@@ -1,3 +1,4 @@
+
 import { NextResponse } from 'next/server';
 import Cookies from 'js-cookie';
 
@@ -13,5 +14,5 @@ export function middleware(request:any) {
 }
 
 export const config = {
-    matcher: ['/protected-route', '/another-protected-route'], // specify the routes that need protection
+    matcher: ['/products/${item.id}', '/login','/signup'], 
 };
